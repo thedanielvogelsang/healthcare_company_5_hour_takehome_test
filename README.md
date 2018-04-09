@@ -2,7 +2,10 @@
 
 ### Setup
 
-To setup, you will need to clone the repo down to your machine and run the following:
+To setup, you will need to clone the repo down to your machine and create a branch with using your name.
+* i.e. `git checkout -b firstname-lastname`
+
+Run the following:
 
 * `rake db:create`
 * `rake db:migrate`
@@ -55,6 +58,10 @@ You will need to:
         * Denoted by the `opioid` `boolean` on `Drug`.
 3. The logic related to these analytics should be tested using `rspec`.
 4. Create a set of API endpoints that can be called to retrieve this information in a structured `JSON` format.
+
+### Submission
+* To submit your work create a pull request with your branch against the original branch.
+* For more information on creating a pull request, reference GitHub: https://help.github.com/articles/creating-a-pull-request/
 
 
 
