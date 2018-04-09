@@ -2,7 +2,7 @@
 
 ### Setup
 
-To setup, you will need to clone the repo down to your machine and create a branch with using your name.
+To setup, you will need to clone the repo down to your machine and create a branch using your name.
 * i.e. `git checkout -b firstname-lastname`
 
 Run the following:
