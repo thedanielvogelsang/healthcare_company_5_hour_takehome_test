@@ -29,7 +29,7 @@ A successful candidate will be able to demonstrate a strong grasp of data modeli
 ### Assignment
 
 You have been provided with a `.csv` file called `prescription_history.csv` that contains information about historical prescriptions that were written by a variety of doctors at a variety of different hospitals.
-* This file can be found in the project at `/lib/data/prescription_history.csv` 
+* This file can be found in the highest level project directory at `/prescription_history.csv` 
 
 Each row contains the following columns:
 * `prescriber_id`
