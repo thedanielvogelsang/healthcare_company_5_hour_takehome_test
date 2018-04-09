@@ -27,7 +27,7 @@ The `seeds.rb` file contains relevant data for the following models: `Drug`, `Me
 We are looking for code quality, not necessarily just rushing through and checking off each task below. It is perfectly acceptable not to finish all the outlined tasks. If you are unable to finish in the time allotted we will ask you to explain your plan for implementing the rest of the tasks.
 * i.e. What classes, models, tables, endpoints would you have created? How would they work together?
 
-A successful candidate will be able to demonstrate a strong grasp of data modeling and seperation of concerns/responsibilities.
+A successful candidate will be able to demonstrate a strong grasp of data modeling, automated testing, and seperation of concerns/responsibilities.
 
 ### Assignment
 
