@@ -2,11 +2,13 @@
 
 ### Setup
 
-To setup, you will need to clone the repo down to your machine and create a branch using your name.
-* i.e. `git checkout -b firstname-lastname`
+To setup, you will need to clone the repo down to your machine and push directly back to the `remote origin`.
+* https://help.github.com/articles/cloning-a-repository/
+* https://help.github.com/articles/pushing-to-a-remote/#remotes-and-forks
 
 Run the following:
 
+* `bundle`
 * `rake db:create`
 * `rake db:migrate`
 * `rake db:seed`
@@ -29,8 +31,6 @@ We are looking for code quality, not necessarily just rushing through and checki
 
 A successful candidate will be able to demonstrate a strong grasp of data modeling, automated testing, and seperation of concerns/responsibilities.
 
-### Assignment
-
 You have been provided with a `.csv` file called `prescription_history.csv` that contains information about historical prescriptions that were written by a variety of doctors at a variety of different hospitals.
 * This file can be found in the highest level project directory at `/prescription_history.csv` 
 
@@ -45,23 +45,29 @@ Each row contains the following columns:
 * `days_supply`
 * `disease`
 
-The columns `medication_id` and `disease` correspond to existing tables in the database. 
+The columns `medication_id` and `disease` correspond to existing tables in the database. The `id` fields from the `csv` should be treated as industry standard identifiers that are usable at any hospital.
 
-You will need to:
+### Tasks
 
-1. Ingest the `csv` into the database in whatever manner seems most fitting.
+Using this `csv`, and the corresponding data that was seeded in the database, you will need to:
+
+1. Ingest the `csv` into the database in whatever manner seems most fitting. 
+    * Assume this is data we purchased from a vendor in order to improve our product offering.
+    * Additional features will be built on top of the different elements found in the data.
 2.  Create a set of analytics around the data ingested to determine the following:
     * The most commonly prescribed drug at each hospital.
     * The average number of prescriptions written by each prescriber.
     * Most common medication ordered to treat each disease.
-    * Which prescriber appears to prescribe the greatest quantity (`frequency_per_day * days_supply`) of addictive painkillers.
+    * Which prescriber appears to prescribe the greatest number of effective doses (`effective_dose = one medication order * frequency_per_day * days_supply`) of addictive painkillers.
         * Denoted by the `opioid` `boolean` on `Drug`.
+        * ex: Medication A with a frequency of 2 and a days supply of 7. 
+            * `effective_dose = 1 * 2 * 7`
+            * `=> 14`
 3. The logic related to these analytics should be tested using `rspec`.
 4. Create a set of API endpoints that can be called to retrieve this information in a structured `JSON` format.
 
 ### Submission
-* To submit your work create a pull request with your branch against the original branch.
-* For more information on creating a pull request, reference GitHub: https://help.github.com/articles/creating-a-pull-request/
+* To submit your work, simply send an email indicating you have finished. We already have access to the repo, as it was created for you.
 
 
 
