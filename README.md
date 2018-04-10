@@ -67,7 +67,14 @@ Using this `csv`, and the corresponding data that was seeded in the database, yo
 4. Create a set of API endpoints that can be called to retrieve this information in a structured `JSON` format.
 
 ### Submission
-* To submit your work, simply send an email indicating you have finished. We already have access to the repo, as it was created for you.
+
+To submit your work, make sure that all of your work is committed and pushed. Please conclude by sending an email indicating you have finished. We already have access to the repo, as it was created for you. 
+
+We will only review any work that was committed by the agreed upon end time.
+
+In your email, please include instructions for importing the `csv` and what endpoints can be used to access the relevant analytics.
+
+
 
 
 
