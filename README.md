@@ -56,7 +56,6 @@ Using this `csv`, and the corresponding data that was seeded in the database, yo
     * Additional features will be built on top of the different elements found in the data.
 2.  Create a set of analytics around the data ingested to determine the following:
     * The most commonly prescribed drug at each hospital.
-    * The average number of prescriptions written by each prescriber.
     * Most common medication ordered to treat each disease.
     * Which prescriber appears to prescribe the greatest number of effective doses (`effective_dose = one medication order * frequency_per_day * days_supply`) of addictive painkillers.
         * Denoted by the `opioid` `boolean` on `Drug`.
