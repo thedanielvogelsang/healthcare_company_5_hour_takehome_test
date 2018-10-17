@@ -3,4 +3,6 @@ Rails.application.routes.draw do
 
   get '/hospitals', to: "api/v1/hospitals/hospital#index"
   get '/hospitals/:id', to: "api/v1/hospitals/hospital#show"
+  get '/diseases', to: "api/v1/diseases/disease#index"
+  get '/diseases/:id', to: "api/v1/diseases/disease#show"
 end
