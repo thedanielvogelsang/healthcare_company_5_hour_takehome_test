@@ -1,4 +1,5 @@
 class Prescriber < ApplicationRecord
+  has_many :prescription_histories
   validates :id, presence: true, uniqueness: true
   validates :name, presence: true
 

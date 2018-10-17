@@ -20,7 +20,7 @@ RSpec.describe Prescription, type: :model do
   end
   context 'relationships' do
     it {should belong_to(:disease)}
-    # it {should have_many(:prescription_histories)}
+    it {should have_many(:prescription_histories)}
   end
   context 'validations' do
     it {should validate_presence_of(:id)}
