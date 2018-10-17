@@ -71,6 +71,31 @@ RSpec.describe PrescriptionHistory, type: :model do
       expect(pres_his.save).to be true
     end
     it 'can call all necessary attributes from associated records' do
+      pres_his = PrescriptionHistory.create(
+                    prescriber_id: @prescriber1.id,
+                    hospital_id: @hospital1.id,
+                    medication_id: @med1.id,
+                    prescription_id: @prescription1.id)
+
+      #prescriber info
+      expect(pres_his.prescriber.id).to eq(1)
+      expect(pres_his.prescriber.name).to eq("Dr. Lhakani")
+
+      #hospital info
+      expect(pres_his.hospital.id).to eq(48404)
+      expect(pres_his.hospital.name).to eq("Hospital1")
+
+      # medication info
+      expect(pres_his.medication.id).to eq(@med1.id)
+      expect(pres_his.medication.drug.name).to eq("Giannicillin")
+
+      # prescription info
+      expect(pres_his.prescription.id).to eq(84)
+      expect(pres_his.prescription.frequency_per_day).to eq(2)
+      expect(pres_his.prescription.days_supply).to eq(7)
+      expect(pres_his.prescription.disease.id).to eq(@gout.id)
+      expect(pres_his.prescription.disease.name).to eq(@gout.name)
+      expect(pres_his.prescription.disease.name).to eq("Gout")
 
     end
   end
