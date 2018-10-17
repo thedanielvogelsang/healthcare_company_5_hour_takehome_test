@@ -1,7 +1,7 @@
 class CreatePrescribers < ActiveRecord::Migration[5.1]
   def change
     create_table :prescribers, id: false do |t|
-      t.integer :id
+      t.primary_key :id
       t.string :name
 
       t.timestamps

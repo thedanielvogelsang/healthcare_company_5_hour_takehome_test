@@ -25,8 +25,7 @@ ActiveRecord::Schema.define(version: 20181017194414) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "hospitals", id: false, force: :cascade do |t|
-    t.integer "id"
+  create_table "hospitals", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -41,8 +40,7 @@ ActiveRecord::Schema.define(version: 20181017194414) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "prescribers", id: false, force: :cascade do |t|
-    t.integer "id"
+  create_table "prescribers", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
