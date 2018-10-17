@@ -8,4 +8,10 @@ class Hospital < ApplicationRecord
   def validate_numeric_id
     return id.to_i === 0 ? errors.add(:id, "id must be an Integer") : true
   end
+
+  def most_prescribed
+    Hospital.find(id).prescription_histories
+                     .joins(:medication).group('medications.drug_id')
+                     .order("COUNT(medications.id) DESC").first.medication.drug
+  end
 end
