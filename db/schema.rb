@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181017203813) do
+ActiveRecord::Schema.define(version: 20181017220333) do
 
   create_table "diseases", force: :cascade do |t|
     t.string "name"
@@ -47,10 +47,10 @@ ActiveRecord::Schema.define(version: 20181017203813) do
   end
 
   create_table "prescription_histories", force: :cascade do |t|
-    t.integer "prescriber_id"
-    t.integer "hospital_id"
-    t.integer "medication_id"
-    t.integer "prescription_id"
+    t.integer "prescriber_id", limit: 8
+    t.integer "hospital_id", limit: 8
+    t.integer "medication_id", limit: 8
+    t.bigint "prescription_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["hospital_id"], name: "index_prescription_histories_on_hospital_id"
@@ -59,13 +59,14 @@ ActiveRecord::Schema.define(version: 20181017203813) do
     t.index ["prescription_id"], name: "index_prescription_histories_on_prescription_id"
   end
 
-  create_table "prescriptions", force: :cascade do |t|
+  create_table "prescriptions", id: :bigint, default: nil, force: :cascade do |t|
     t.integer "frequency_per_day"
     t.integer "days_supply"
     t.integer "disease_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["disease_id"], name: "index_prescriptions_on_disease_id"
+    t.index ["id"], name: "sqlite_autoindex_prescriptions_1", unique: true
   end
 
 end

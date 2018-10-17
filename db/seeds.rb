@@ -43,3 +43,5 @@ disease_values = [
 ]
 
 Disease.create(disease_values)
+
+puts "Done seeding data"
