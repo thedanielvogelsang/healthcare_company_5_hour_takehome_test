@@ -54,7 +54,6 @@ RSpec.describe PrescriptionHistory, type: :model do
     @prescription2 = Prescription.create(id: 12, disease_id: @gout.id, frequency_per_day: 1, days_supply: 10)
     @prescription3 = Prescription.create(id: 1, disease_id: @gout.id, frequency_per_day: 1, days_supply: 10)
   end
-
   context 'relationships' do
     it {should belong_to(:prescriber)}
     it {should belong_to(:hospital)}
