@@ -2,6 +2,7 @@ class PrescriptionHistory < ApplicationRecord
   belongs_to :prescriber
   belongs_to :hospital
   belongs_to :medication
+  has_one :drug, through: :medication
   belongs_to :prescription
 
   def self.most_effective_opioid_prescribers(limit=1)
