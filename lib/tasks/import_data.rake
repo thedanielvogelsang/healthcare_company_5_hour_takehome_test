@@ -12,7 +12,7 @@ task :import_data, [:filename] => :environment do
       disease.to_i === 0 ? disease = Disease.find_by(name: row[:disease]) : disease
 
       prescription = Prescription.find_or_create_by(id: row[:prescription_id],
-                                         disease_id: row[:disease],
+                                         disease_id: disease,
                                          frequency_per_day: row[:frequency_per_day],
                                          days_supply: row[:days_supply])
 
