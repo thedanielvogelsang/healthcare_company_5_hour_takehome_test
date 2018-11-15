@@ -1,4 +1,25 @@
-# RxREVU Technical Assessment
+# Technical Assessment
+
+This is a technical take-home test from a company for which I recently applied. The task, shown below, was to build a JSON-returning API from a collection of unparsed CSV documents (containing a handful of pitfalls). Three of 7 models were created for me, but database architecture / association was mine to design. The application was additionally required to satisfy a set of analytics requirements from the data, and was time-boxed to 5 hours. In addition to base requirements, for fun I opted to create several extra methods for additional data analysis. API endpoints were versioned, and urls found below:
+
+```
+
+  get '/hospitals', to: "api/v1/hospitals/hospital#index"
+  get '/hospitals/:id', to: "api/v1/hospitals/hospital#show"
+  get '/diseases', to: "api/v1/diseases/disease#index"
+  get '/diseases/:id', to: "api/v1/diseases/disease#show"
+  get '/medications', to: "api/v1/medications/medication#index"
+  get '/medications/:id', to: "api/v1/medications/medication#show"
+  get '/prescribers', to: "api/v1/prescribers/prescriber#index"
+  get '/prescribers/:id', to: "api/v1/prescribers/prescriber#show"
+  get '/prescriptions', to: "api/v1/prescriptions/prescription#index"
+  get '/prescriptions/:id', to: "api/v1/prescriptions/prescription#show"
+  get '/drugs', to: "api/v1/drugs/drug#index"
+  get '/drugs/:id', to: "api/v1/drugs/drug#show"
+
+```
+
+===============
 
 ### Setup
 
@@ -23,7 +44,7 @@ The `seeds.rb` file contains relevant data for the following models: `Drug`, `Me
             * Lipitor 20 mg time release capsule
 * A `disease` consists of only a name and an identifier.
 * Reference the `schema` or `rails console` for additional information about specific columns and types on these models.
-* You will likely need to create additional models/tables to accomplish the tasks outlined below. 
+* You will likely need to create additional models/tables to accomplish the tasks outlined below.
 
 ### Overview
 We are looking for code quality, not necessarily just rushing through and checking off each task below. It is perfectly acceptable not to finish all the outlined tasks. If you are unable to finish in the time allotted we will ask you to explain your plan for implementing the rest of the tasks.
@@ -32,7 +53,7 @@ We are looking for code quality, not necessarily just rushing through and checki
 A successful candidate will be able to demonstrate a strong grasp of data modeling, automated testing, and seperation of concerns/responsibilities.
 
 You have been provided with a `.csv` file called `prescription_history.csv` that contains information about historical prescriptions that were written by a variety of doctors at a variety of different hospitals.
-* This file can be found in the highest level project directory at `/prescription_history.csv` 
+* This file can be found in the highest level project directory at `/prescription_history.csv`
 
 Each row contains the following columns:
 * `prescriber_id`
@@ -51,7 +72,7 @@ The columns `medication_id` and `disease` correspond to existing tables in the d
 
 Using this `csv`, and the corresponding data that was seeded in the database, you will need to:
 
-1. Ingest the `csv` into the database in whatever manner seems most fitting. 
+1. Ingest the `csv` into the database in whatever manner seems most fitting.
     * Assume this is data we purchased from a vendor in order to improve our product offering.
     * Additional features will be built on top of the different elements found in the data.
 2.  Create a set of analytics around the data ingested to determine the following:
@@ -59,7 +80,7 @@ Using this `csv`, and the corresponding data that was seeded in the database, yo
     * Most common medication ordered to treat each disease.
     * Which prescriber appears to prescribe the greatest number of effective doses (`effective_dose = one medication order * frequency_per_day * days_supply`) of addictive painkillers.
         * Denoted by the `opioid` `boolean` on `Drug`.
-        * ex: Medication A with a frequency of 2 and a days supply of 7. 
+        * ex: Medication A with a frequency of 2 and a days supply of 7.
             * `effective_dose = 1 * 2 * 7`
             * `=> 14`
 3. The logic related to these analytics should be tested using `rspec`.
@@ -67,21 +88,8 @@ Using this `csv`, and the corresponding data that was seeded in the database, yo
 
 ### Submission
 
-To submit your work, make sure that all of your work is committed and pushed. Please conclude by sending an email indicating you have finished. We already have access to the repo, as it was created for you. 
+To submit your work, make sure that all of your work is committed and pushed. Please conclude by sending an email indicating you have finished. We already have access to the repo, as it was created for you.
 
 We will only review any work that was committed by the agreed upon end time.
 
 In your email, please include instructions for importing the `csv` and what endpoints can be used to access the relevant analytics.
-
-
-
-
-
-
-
-
-
-
-
-
-
