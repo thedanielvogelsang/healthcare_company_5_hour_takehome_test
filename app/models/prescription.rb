@@ -3,6 +3,7 @@ class Prescription < ApplicationRecord
   validates_presence_of :frequency_per_day
   validates_presence_of :days_supply
   belongs_to :disease
+  has_many :prescription_histories
 
   validate :validate_numeric_id
 

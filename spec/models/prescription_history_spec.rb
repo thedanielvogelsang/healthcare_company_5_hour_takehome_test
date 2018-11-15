@@ -52,8 +52,8 @@ RSpec.describe PrescriptionHistory, type: :model do
 
     @prescription1 = Prescription.create(id: 84, disease_id: @gout.id, frequency_per_day: 2, days_supply: 7)
     @prescription2 = Prescription.create(id: 12, disease_id: @gout.id, frequency_per_day: 1, days_supply: 10)
+    @prescription3 = Prescription.create(id: 1, disease_id: @gout.id, frequency_per_day: 1, days_supply: 10)
   end
-
   context 'relationships' do
     it {should belong_to(:prescriber)}
     it {should belong_to(:hospital)}
@@ -96,6 +96,60 @@ RSpec.describe PrescriptionHistory, type: :model do
       expect(pres_his.prescription.disease.id).to eq(@gout.id)
       expect(pres_his.prescription.disease.name).to eq(@gout.name)
       expect(pres_his.prescription.disease.name).to eq("Gout")
+
+    end
+  end
+  context 'business analytics' do
+    it 'can calculate most-used drug' do
+      # 3 prescriptions written, 2 for one drug, 1 for another, all for Gout
+      pres_his1 = PrescriptionHistory.create(
+                    prescriber_id: @prescriber1.id,
+                    hospital_id: @hospital1.id,
+                    medication_id: @med1.id,
+                    prescription_id: @prescription1.id)
+      pres_his2 = PrescriptionHistory.create(
+                    prescriber_id: @prescriber1.id,
+                    hospital_id: @hospital1.id,
+                    medication_id: @med1.id,
+                    prescription_id: @prescription2.id)
+      pres_his3 = PrescriptionHistory.create(
+                    prescriber_id: @prescriber2.id,
+                    hospital_id: @hospital1.id,
+                    medication_id: @med15.id,
+                    prescription_id: @prescription3.id)
+
+      drug = PrescriptionHistory
+                       .joins(:medication).group('medications.drug_id')
+                       .order("COUNT(medications.id) DESC").first.medication.drug
+
+      expect(drug).to eq(@med1.drug)
+      expect(drug).to_not eq(@med15.drug)
+
+    end
+    it 'can reaches for the right medication' do
+      # 3 prescriptions written, 2 for one drug, 1 for another, all for Gout
+      pres_his1 = PrescriptionHistory.create(
+                    prescriber_id: @prescriber1.id,
+                    hospital_id: @hospital1.id,
+                    medication_id: @med1.id,
+                    prescription_id: @prescription1.id)
+      pres_his2 = PrescriptionHistory.create(
+                    prescriber_id: @prescriber1.id,
+                    hospital_id: @hospital1.id,
+                    medication_id: @med15.id,
+                    prescription_id: @prescription2.id)
+      pres_his3 = PrescriptionHistory.create(
+                    prescriber_id: @prescriber2.id,
+                    hospital_id: @hospital1.id,
+                    medication_id: @med15.id,
+                    prescription_id: @prescription3.id)
+
+      drug = PrescriptionHistory
+                       .joins(:medication).group('medications.drug_id')
+                       .order("COUNT(medications.id) DESC").first.medication.drug
+
+      expect(drug).to eq(@med15.drug)
+      expect(drug).to_not eq(@med1.drug)
 
     end
   end

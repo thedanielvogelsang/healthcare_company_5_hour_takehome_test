@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Hospital, type: :model do
+RSpec.describe Medication, type: :model do
   before :each do
     disease_values = [
       {id: 96929, name: "Gout"},
@@ -53,60 +53,34 @@ RSpec.describe Hospital, type: :model do
     @prescription1 = Prescription.create(id: 84, disease_id: @gout.id, frequency_per_day: 2, days_supply: 7)
     @prescription2 = Prescription.create(id: 12, disease_id: @gout.id, frequency_per_day: 1, days_supply: 10)
     @prescription3 = Prescription.create(id: 1, disease_id: @gout.id, frequency_per_day: 1, days_supply: 10)
+
+    @pres_his1 = PrescriptionHistory.create(
+                  prescriber_id: @prescriber1.id,
+                  hospital_id: @hospital1.id,
+                  medication_id: @med1.id,
+                  prescription_id: @prescription1.id)
+    @pres_his2 = PrescriptionHistory.create(
+                  prescriber_id: @prescriber1.id,
+                  hospital_id: @hospital1.id,
+                  medication_id: @med1.id,
+                  prescription_id: @prescription2.id)
+    @pres_his3 = PrescriptionHistory.create(
+                  prescriber_id: @prescriber2.id,
+                  hospital_id: @hospital1.id,
+                  medication_id: @med15.id,
+                  prescription_id: @prescription3.id)
   end
   context 'relationships' do
     # it {should belong_to(:hospital)}
     it {should have_many(:prescription_histories)}
   end
-  context 'validations' do
-    it {should validate_presence_of(:id)}
-    it {should validate_presence_of(:name)}
-  end
-  context 'intializing and saving' do
-    it 'can be created with any integer as id' do
-      hospital1 = Hospital.create(id: 48404, name: "Hospital1")
-      hospital2 = Hospital.new(id: "ABAB", name: "Hospital2")
-      expect(hospital1).to be_present
-      expect(hospital2.save).to be false
-    end
-    it 'hospital ids must still be unique' do
-      hospital1 = Hospital.create(id: 48404, name: "Hospital1")
-      hospital2 = Hospital.new(id: 48404, name: "Hospital2")
-      expect(hospital1).to be_present
-      expect(hospital2.save).to be false
-      expect(hospital2.errors
-                      .messages
-                      .values.include?(["has already been taken"])).to be true
-    end
-  end
-  context 'business analytics' do
-    it 'can calculate most-used drug' do
-      # 3 prescriptions written, 2 for one drug, 1 for another, all for Gout
-      pres_his1 = PrescriptionHistory.create(
-                    prescriber_id: @prescriber1.id,
-                    hospital_id: @hospital1.id,
-                    medication_id: @med1.id,
-                    prescription_id: @prescription1.id)
-      pres_his2 = PrescriptionHistory.create(
-                    prescriber_id: @prescriber1.id,
-                    hospital_id: @hospital1.id,
-                    medication_id: @med1.id,
-                    prescription_id: @prescription2.id)
-      pres_his3 = PrescriptionHistory.create(
-                    prescriber_id: @prescriber2.id,
-                    hospital_id: @hospital1.id,
-                    medication_id: @med15.id,
-                    prescription_id: @prescription3.id)
+  context 'second endpoint (most commonly ordered med) tests' do
+    it 'can calculate correct medication given id' do
+      medication = Medication.joins(:prescription_histories).joins(:prescriptions)
+                .where(:prescriptions => {disease_id: @gout.id})
+                .group("medications.id").order("COUNT(medications.id) DESC").first
 
-      drug = PrescriptionHistory
-                       .joins(:medication).group('medications.drug_id')
-                       .order("COUNT(medications.id) DESC").first.medication.drug
-
-      hospital = Hospital.find(@hospital1.id)
-
-      expect(hospital.most_prescribed).to eq(drug)
-      expect(drug).to eq(@med1.drug)
-
+      expect(medication).to eq(@med1)
     end
   end
 end
