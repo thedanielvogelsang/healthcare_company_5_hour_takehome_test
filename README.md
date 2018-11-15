@@ -1,6 +1,8 @@
 # Technical Assessment
 
-This is a technical take-home test from a company for which I recently applied. The task, shown below, was to build a JSON-returning API from a collection of unparsed CSV documents (containing a handful of pitfalls). Three of 7 models were created for me, but database architecture / association was mine to design. The application was additionally required to satisfy a set of analytics requirements from the data, and was time-boxed to 5 hours. In addition to base requirements, for fun I opted to create several extra methods for additional data analysis. API endpoints were versioned, and urls found below:
+This is a technical take-home test from a company for which I recently applied. The task, shown below, was to build a Rails-based, JSON-returning API from a collection of unparsed CSV documents (containing a handful of pitfalls), containing a few thousand fake health record data. Three of seven models were created for me, but database architecture / association was mine to design. The application was time-boxed to 5 hours, and additionally required me to satisfy a set of analytics requirements from the data, demanding adequate SQL/ActiveRecord query knowledge. I am very happy with my performance for the test, and am pushing up this repo as an example of my style of crafting CLEAN, MODULAR code, and preference for adherence to OBJECT ORIENTED / OOP principles. In addition to base requirements, for fun I opted to create several extra methods for additional data analysis. API endpoints were versioned, and models serialized -- also a personal choice. Sample urls found below:
+
+(if you have Rails / Ruby on your local machine, just clone the repo, bundle install, rake db:migrate / rake db:seed, and rails s to launch!)
 
 ```
 
