@@ -20,7 +20,7 @@ This is a technical take-home test from a company for which I recently applied. 
 ```
 (if you have Rails / Ruby on your local machine, just clone the repo, bundle install, rake db:migrate / rake db:seed, and rails s to launch!)
 
-#### Below, find the original take-home-test spec: 
+## Below, find the original take-home-test spec: 
 
 ===============
 
